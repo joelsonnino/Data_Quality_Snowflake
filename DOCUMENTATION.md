@@ -45,12 +45,6 @@ The platform aims to be the essential complement to any Anomaly Detection system
 
 ## 2. Problem Solved & Context
 
-In today's data-driven business landscape, especially within the high-volume, high-velocity gaming industry, data reliability is paramount. Poor data quality can lead to:
-
-*   **Flawed Business Decisions:** Based on inaccurate or incomplete metrics.
-*   **Operational Issues:** Difficulties in analyzing user behavior, optimizing marketing campaigns, or enhancing the gaming experience.
-*   **Loss of Trust:** Analysts and stakeholders lose confidence in the data, reducing the adoption of data-driven solutions.
-
 The manual data quality control process is often inefficient and unscalable. This project addresses the need to automate, standardize, and monitor data quality at scale, ensuring that data pipelines deliver accurate and reliable information for strategic analysis and decision-making.
 
 ## 3. Project Goals
