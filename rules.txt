@@ -1,0 +1,53 @@
+Automatic DQ Rules Summary
+
+- Primary Keys: `ID`, `USER_ID`, `DATE_ID`, `CAMPAIGN_ID` -> Not null + Unique
+
+- Foreign Keys: `_ID`, `UTM_KEY` -> Not null
+
+- Timestamps: `CREATEDAT`, `UPDATEDAT`, etc. -> Not null + Not in future
+
+- Email: `EMAIL` -> Not null + Valid format (regex)
+
+- Country Codes: `COUNTRY`, `COUNTRY_CODE` -> 2-3 chars + Not empty
+
+- Financial Fields: `BALANCE`, `REVENUE`, `POINTS`, etc. -> Non-negative
+
+- Campaign Metrics: `IMPRESSIONS`, `CLICKS`, `DURATION` -> Non-negative, DURATION <= 730
+
+- Boolean Flags: `IS_`, `_IND`, known flags -> Must be boolean (0/1 or TRUE/FALSE)
+
+- Date Parts: `MONTH_ID`, `QUARTER_ID`, `WEEK_NUMBER` -> Valid ranges
+
+- Year: `YEAR` -> 2015 to current_year + 10
+
+- UTM Keys: `UTM_KEY` -> Not empty + Length <= 200
+
+- Marketing Fields: `SOURCE`, `CAMPAIGN`, etc. -> Not empty
+
+- User Types/Roles: `USER_TYPE`, `ROLE`, etc. -> Not empty
+
+- Game IDs: `FIRST_GAME`, `LAST_GAME`, `MAIN_GAME` -> Positive
+
+- Subscriptions: `NUMBER_OF_ACTIVE_SUBSCRIPTIONS` -> 0 <= value <= 10
+
+- Currency: `CURRENCY` -> Length = 3
+
+- JSON/VARIANT: `VARIANT` type -> Must contain valid JSON
+
+Cross-Column Rules
+- DATE_ID = TO_NUMBER(DATE): `DATE_ID`, `DATE`
+
+- CREATEDAT <= UPDATEDAT: `CREATEDAT`, `UPDATEDAT`
+
+- FIRST_IMPRESSION_DATE <= LAST_IMPRESSION_DATE: `FIRST_IMPRESSION_DATE`,
+
+`LAST_IMPRESSION_DATE`
+
+- DATE within impression range: `DATE`, `FIRST_IMPRESSION_DATE`, `LAST_IMPRESSION_DATE`
+
+- CLICKS <= IMPRESSIONS: `CLICKS`, `IMPRESSIONS`
+
+Table-Specific Rules
+- ACCOUNTS: If `ISCONFIRMEDEMAIL = TRUE` -> `EMAIL` must not be null
+
+- DIM_USERS: If `IS_ACTIVE_SUB_IND = 1` -> `NUMBER_OF_ACTIVE_SUBSCRIPTIONS > 0`

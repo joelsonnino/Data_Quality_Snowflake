@@ -1,0 +1,14 @@
+# Python specific
+__pycache__/
+*.pyc
+*.log
+venv/              # Ignora l'ambiente virtuale (se lo crei in questa cartella)
+.env               # Ignora il file delle variabili d'ambiente
+
+# Output files and directories
+dq_reports/*       # Ignora tutti i contenuti della cartella dq_reports
+!dq_reports/.gitkeep # Ma non ignorare il file .gitkeep al suo interno
+
+# Specific files to ignore
+note.txt
+schema_discovery_filtered_output.txt
