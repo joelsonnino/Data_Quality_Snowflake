@@ -1,3 +1,5 @@
+--- START OF FILE deployment.md ---
+
 This project has two main parts that need to run in AWS:
 1.  **The DQ Check Runner (`run_automatic_dq_checks.py`):** This is a scheduled script that connects to Snowflake, runs checks, and produces a JSON report.
 2.  **The DQ Dashboard (`dq_dashboard.py`):** This is a Streamlit web application that visualizes the JSON report.
@@ -160,21 +162,15 @@ Our current code assumes local file paths (`.env`, `dq_reports/dq_results.json`)
         *   Go to AWS Console -> Secrets Manager.
         *   Click "Store a new secret".
         *   Choose "Other type of secret".
-        *   Use "Plaintext" (for now, for simplicity, though JSON is also an option).
-        *   Paste your `.env` content *exactly as is*, but without the `SNOWFLAKE_` prefix for the keys (Secrets Manager will automatically put them as key-value pairs if you choose JSON, but for plaintext, it's just the value).
-            *   **Correction for Junior:** Secrets Manager *prefers* JSON structure for key-value pairs. Let's make it a JSON secret.
-            *   Choose "Credentials for other database".
-            *   Set "Secret key/value" using `key=value` for each Snowflake credential.
-            *   **Better Junior's Task for Secrets Manager:**
-                *   Secret Type: `Other type of secret`
-                *   Key/Value pairs:
-                    *   `user`: `your_snowflake_user`
-                    *   `password`: `your_snowflake_password`
-                    *   `account`: `your_snowflake_account_identifier`
-                    *   `role`: `your_snowflake_role`
-                    *   `warehouse`: `your_snowflake_warehouse`
-                *   Name your secret: `snowflake/dq-platform-credentials`
-                *   Click "Next" until "Store".
+        *   Set "Secret key/value" using `key=value` for each Snowflake credential.
+            *   Key/Value pairs:
+                *   `user`: `your_snowflake_user`
+                *   `password`: `your_snowflake_password`
+                *   `account`: `your_snowflake_account_identifier`
+                *   `role`: `your_snowflake_role`
+                *   `warehouse`: `your_snowflake_warehouse`
+        *   Name your secret: `snowflake/dq-platform-credentials`
+        *   Click "Next" until "Store".
         *   **Why:** Secrets Manager integrates directly with IAM, allowing you to grant specific services (like Lambda and App Runner) permission to *read* the secret, without exposing the secret itself.
 
 3.  **Create IAM Role for Lambda (DQ Runner):**
@@ -367,3 +363,5 @@ Our current code assumes local file paths (`.env`, `dq_reports/dq_results.json`)
 *   **Lambda Layers:** For common dependencies like `pandas` and `snowflake-connector-python`, create a Lambda Layer. This makes your deployment package smaller and faster to upload, especially if you have multiple Lambda functions using the same libraries.
 *   **Terraform/CloudFormation:** For Infrastructure as Code, use tools like Terraform or AWS CloudFormation to define and manage your AWS resources. This ensures your infrastructure is version-controlled and reproducible.
 *   **Cost Optimization:** Monitor usage patterns and adjust Lambda memory/timeout, App Runner CPU/Memory, or S3 storage tiers as needed to optimize costs.
+
+---
