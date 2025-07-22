@@ -1,7 +1,3 @@
-Okay, here is the full project documentation in English, following a professional structure suitable for a data engineering team.
-
----
-
 # Project Documentation: Snowflake Data Quality Control Platform
 
 ## Table of Contents
